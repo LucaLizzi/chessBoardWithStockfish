@@ -1,0 +1,37 @@
+import chess
+import chess.pgn
+from stockfish import Stockfish
+
+# Percorso del motore Stockfish
+stockfishPath = r'.\stockfish\stockfish-windows-x86-64-avx2.exe'  
+stockfish = Stockfish(stockfishPath)
+stockfish.set_skill_level(20)
+
+# Carica una partita da un file PGN
+gamePath = r'.\partite\partita2.pgn'
+	
+with open(gamePath) as f:
+       	game = chess.pgn.read_game(f)
+
+board = game.board()	#starts the game from the initial position
+print(game)
+print("\n")
+print(board)
+print("\n")
+
+for move in game.mainline_moves():
+	board.push(move)	# do the move on the chessboard
+	print(board)
+	print("\n")
+	
+	# analise position with stockfish
+	# it returns centipawn (cp) (+100 = white in little advance of 1 pawn, -50 = black in little advance of half pawn
+	stockfish.set_fen_position(board.fen())
+	score = stockfish.get_evaluation()
+
+	print(f"the score is: {score['value']}, the move is: {move}\n")
+
+if score['type'] == 'mate' :
+	print("checkM8\n")
+
+	print("end of the game\n")
