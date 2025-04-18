@@ -24,8 +24,9 @@ for move in game.mainline_moves():
 	print(board)
 	print("\n")
 	
-	# analise position with stockfish
+	# analyse position with stockfish
 	# it returns centipawn (cp) (+100 = white in little advance of 1 pawn, -50 = black in little advance of half pawn
+	# arduino sends the FEN notation of the board, in this code is identified with board.fen()
 	stockfish.set_fen_position(board.fen())
 	score = stockfish.get_evaluation()
 
