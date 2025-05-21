@@ -2,13 +2,13 @@ import chess
 import chess.pgn
 from stockfish import Stockfish
 
-# Percorso del motore Stockfish
-stockfishPath = r'.\stockfish\stockfish-windows-x86-64-avx2.exe'  
+# path of Stockfish module
+stockfishPath = r'path-to-stockfish-module\stockfish\stockfish-windows-x86-64-avx2.exe'  
 stockfish = Stockfish(stockfishPath)
 stockfish.set_skill_level(20)
 
-# Carica una partita da un file PGN
-gamePath = r'.\partite\partita2.pgn'
+# load a game from a .pgn file
+gamePath = r'path-to-game-.pgn\partita2.pgn'
 	
 with open(gamePath) as f:
        	game = chess.pgn.read_game(f)
